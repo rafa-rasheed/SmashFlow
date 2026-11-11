@@ -21,3 +21,9 @@ SmashFlow is a responsive web application for managing badminton tournaments and
 
 This repository contains the main source code of the project.
 
+
+##Screenshots
+![Home Page](homepage.png)
+![Club registration](club-registration.png)
+![Terms and conditions](terms.png)
+![Terms and conditions](terms2.png)
