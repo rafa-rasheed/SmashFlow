@@ -1,0 +1,249 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Mainpage.master.cs" Inherits="SMASH_FLOW.Mainpage" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmashFlow | Badminton Tournament</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        :root {
+            --sf-gold: #8a6a2f;
+            --sf-dark: #111827;
+            --sf-text: #1f2937;
+            --sf-bg: #f6f8fb;
+        }
+
+        
+        .sf-body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--sf-bg);
+            color: var(--sf-text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .sf-main {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        
+        .sf-header { z-index: 1030; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+        .sf-navbar { background: #fff; padding: .4rem 0; }
+
+        .sf-brand { display: flex; align-items: center; gap: .6rem; margin: 0; }
+        .sf-brand img { height: clamp(38px, 5vw, 52px); width: auto; object-fit: contain; }
+        .sf-brand-text { display: flex; flex-direction: column; line-height: 1.1; color: #000; }
+        .sf-brand-text strong { font-size: clamp(1.05rem, 2.2vw, 1.5rem); letter-spacing: .5px; }
+        .sf-brand-text small  { font-size: clamp(.65rem, 1.2vw, .8rem); }
+
+        .sf-toggler { border: 0; font-size: 1.4rem; padding: .25rem .6rem; }
+        .sf-toggler:focus { box-shadow: none; }
+
+        .sf-nav .nav-link {
+            color: #000;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: .6rem 1rem;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+        }
+        .sf-nav .nav-link i { margin-right: .5rem; }
+        .sf-nav .nav-link:hover { color: var(--sf-gold); }
+        .sf-nav .nav-link.active { color: var(--sf-gold); border-bottom-color: var(--sf-gold); }
+
+        /* Phone / tablet: links stack inside the hamburger menu */
+        @media (max-width: 991.98px) {
+            .sf-nav .nav-link { border-bottom: 0; border-left: 3px solid transparent; padding: .75rem 1rem; }
+            .sf-nav .nav-link.active { border-left-color: var(--sf-gold); background: #faf6ee; }
+            #sfNav { padding-bottom: .5rem; border-top: 1px solid #eee; margin-top: .4rem; }
+        }
+
+       
+        .sf-hero {
+            position: relative;
+            min-height: clamp(150px, 24vw, 270px);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: #111;
+        }
+        .sf-hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .sf-hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.5); }
+        .sf-hero-inner { position: relative; color: #fff; }
+
+        .sf-tagline {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: clamp(1.1rem, 2.6vw, 1.9rem);
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .6rem;
+        }
+        .sf-bar { opacity: .7; }
+        .sf-hero-sub { margin: .4rem 0 0; font-size: clamp(.85rem, 1.6vw, 1.05rem); opacity: .95; }
+
+        
+        .sf-footer { background: var(--sf-dark); color: #fff; margin-top: 1.25rem; padding: .9rem 0 .6rem; }
+        .sf-footer a { color: #fff; text-decoration: none; }
+        .sf-footer a:hover { color: #22c55e; }
+
+        .sf-footer-top {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:flex-start;
+            align-items: center;
+            gap: 1.25rem 24rem;
+        }
+        .sf-footer-brand h3 { margin: 0;  font-size: 1.15rem; }
+        .sf-footer-tagline { margin: .1rem 0 0; font-size:.8rem; color: #9ca3af;}
+
+        .sf-footer-contact a  { font-size: 1rem; white-space:nowrap; }
+        .sf-footer-contact i { margin-right:.4rem; font-size: 1.2rem; }
+        .sf-footer-contact .fa-whatsapp { font-size: 1.5rem; color: lawngreen; vertical-align: middle; }
+        .sf-footer-contact .fa-globe { color:#60a5fa;}
+
+        .sf-footer-bottom {
+            margin-top: .6rem;
+            padding-top: .5rem;
+            border-top: 1px solid #374151;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: .2rem .6rem;
+            font-size: .85rem;
+        }
+        .sf-sep { color: #6b7280; }
+
+        /* Phone: centre the footer content */
+        @media (max-width: 767.98px) {
+            .sf-footer-top { flex-direction:column; text-align:center; gap: 1rem; }  
+            .sf-footer-bottom { justify-content: center; text-align: center; }
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="sf-body">
+
+    
+    <header class="sf-header sticky-top">
+        <nav class="navbar navbar-expand-lg sf-navbar">
+            <div class="container-xl">
+
+                <a class="navbar-brand sf-brand" href="~/Homepage" runat="server">
+                    <img src="Images/Logo.jpeg" alt="SmashFlow logo" />
+                    <span class="sf-brand-text">
+                        <strong>SMASHFLOW</strong>
+                        <small>Badminton Tournament</small>
+                    </span>
+                </a>
+
+                <button class="navbar-toggler sf-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#sfNav"
+                        aria-controls="sfNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="sfNav">
+                    <ul class="navbar-nav sf-nav mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Homepage" runat="server"><i class="fa-solid fa-house"></i>Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Matches" runat="server"><i class="fa-solid fa-calendar-days"></i>Matches</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Results" runat="server"><i class="fa-solid fa-trophy"></i>Results</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Gallery" runat="server"><i class="fa-solid fa-image"></i>Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Image Upload" runat="server"><i class="fa-solid fa-cloud-arrow-up"></i>Gallery Upload</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav sf-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/Login" runat="server"><i class="fa-solid fa-user"></i>Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <%-- HERO (a page can replace or empty this with its own Content control) --%>
+    <asp:ContentPlaceHolder ID="HeroPlaceHolder" runat="server">
+        <section class="sf-hero">
+            <img src="Images/Background.jpeg" alt="" class="sf-hero-bg" />
+            <div class="sf-hero-overlay"></div>
+            <div class="container-xl sf-hero-inner">
+                <h2 class="sf-tagline">
+                    <span>Play</span><span class="sf-bar">|</span><span>Compete</span><span class="sf-bar">|</span><span>Grow</span>
+                </h2>
+                <p class="sf-hero-sub">The Perfect Solution For Badminton Tournament</p>
+            </div>
+        </section>
+    </asp:ContentPlaceHolder>
+
+    <%-- PAGE CONTENT --%>
+    <form id="form1" runat="server" class="sf-main">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+
+    <%-- FOOTER --%>
+    <footer class="sf-footer">
+        <div class="container-xl">
+            <div class="sf-footer-top">
+                <div class="sf-footer-brand">
+                    <h3>AsianSkySoft</h3>
+                    <p class="sf-footer-tagline">The Complete Solution</p>
+                    
+                </div>
+                <div class="sf-footer-contact">
+                    <a href="https://wa.me/96878565649" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-whatsapp"></i>   Contact Us on WhatsApp
+                    </a>
+                </div>
+                <div class="sf-footer-contact">
+                <a href="https://asianskysoft.com" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-globe"></i>www.asianskysoft.com</a>
+                </div>
+            </div>
+            <div class="sf-footer-bottom">
+                <span>&copy; <%= DateTime.Now.Year %> AsianSkySoft. All rights reserved.</span>
+                <span class="sf-sep">|</span>
+                <a href="PrivacyPolicy.aspx">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Highlight the link of the page you are on
+        document.querySelectorAll('.sf-nav .nav-link').forEach(function (a) {
+            if (a.pathname.toLowerCase() === location.pathname.toLowerCase()) a.classList.add('active');
+        });
+    </script>
+</body>
+</html>
